@@ -1,0 +1,13 @@
+C:\Users\andra\source\repos\ProyectoP1\bin\Debug\ProyectoP1.exe.config
+C:\Users\andra\source\repos\ProyectoP1\bin\Debug\ProyectoP1.exe
+C:\Users\andra\source\repos\ProyectoP1\bin\Debug\ProyectoP1.pdb
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.csproj.AssemblyReference.cache
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.Form1.resources
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.frmPoligonoEstrellado.resources
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.Properties.Resources.resources
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.csproj.GenerateResource.cache
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.csproj.CoreCompileInputs.cache
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.exe
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.pdb
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.exe.config
+C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.frmEstrellaGeometrica.resources
