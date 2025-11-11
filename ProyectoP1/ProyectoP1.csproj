@@ -47,8 +47,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CEstrellaGeometrica.cs" />
+    <Compile Include="CGema.cs" />
     <Compile Include="CPoligonoEstrellado.cs" />
     <Compile Include="CTransformation.cs" />
+    <Compile Include="fmrGema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fmrGema.Designer.cs">
+      <DependentUpon>fmrGema.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +76,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="fmrGema.resx">
+      <DependentUpon>fmrGema.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

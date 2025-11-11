@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ProyectoP1
+{
+    internal class CGema
+    {
+        private float mAltura; // Altura de la gema
+        private Graphics mGraph;
+        private Pen mPen;
+        private const float SF = 1; // Factor de escalamiento
+
+        public CGema()
+        {
+            mAltura = 0.0f;
+        }
+
+        public bool ReadData(TextBox txtSide)
+        {
+            bool respuesta = true;
+            try
+            {
+                mAltura = float.Parse(txtSide.Text);
+                if (mAltura <= 0.0f)
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                respuesta = false;
+                MessageBox.Show("Ingrese Datos válidos...!", "ERROR!");
+            }
+
+            return respuesta;
+        }
+
+        public void InitializeData(TextBox txtSide, PictureBox picCanvas)
+        {
+            mAltura = 0.0f;
+            txtSide.Text = "";
+            txtSide.Focus();
+            picCanvas.Refresh();
+        }
+
+        // Calcula los vértices del decágono (10 lados) exterior
+        private PointF[] CalcularDecagonoExterior()
+        {
+            PointF[] vertices = new PointF[10];
+            float radio = mAltura / 2; // Radio basado en la altura
+            float startAngle = 18f; // Ángulo de inicio para un decágono (360/10/2)
+
+            for (int i = 0; i < 10; i++)
+            {
+                float angle = (startAngle + i * 36f) * (float)Math.PI / 180.0f;
+                vertices[i] = new PointF(
+                    radio * (float)Math.Cos(angle),
+                    radio * (float)Math.Sin(angle)
+                );
+            }
+
+            return vertices;
+        }
+
+        // Calcula los vértices del pentágono interior superior
+        private PointF[] CalcularPentagonoSuperior()
+        {
+            PointF[] vertices = new PointF[5];
+            float radio = mAltura / 5; // Radio más pequeño
+            float startAngle = 18f + 36f; // Desplazado para alinear con el decágono
+            float offsetY = -mAltura / 6; // Desplazado hacia arriba
+
+            for (int i = 0; i < 5; i++)
+            {
+                float angle = (startAngle + i * 72f) * (float)Math.PI / 180.0f;
+                vertices[i] = new PointF(
+                    radio * (float)Math.Cos(angle),
+                    radio * (float)Math.Sin(angle) + offsetY
+                );
+            }
+
+            return vertices;
+        }
+
+        // Calcula los vértices del pentágono interior inferior
+        private PointF[] CalcularPentagonoInferior()
+        {
+            PointF[] vertices = new PointF[5];
+            float radio = mAltura / 5; // Radio más pequeño
+            float startAngle = 18f; // Rotado 180 grados
+            float offsetY = mAltura / 6; // Desplazado hacia abajo
+
+            for (int i = 0; i < 5; i++)
+            {
+                float angle = (startAngle + i * 72f) * (float)Math.PI / 180.0f;
+                vertices[i] = new PointF(
+                    radio * (float)Math.Cos(angle),
+                    radio * (float)Math.Sin(angle) + offsetY
+                );
+            }
+
+            return vertices;
+        }
+
+        // Dibuja las líneas que conectan los pentágonos con el decágono
+        private void DibujarConexiones(Graphics g, Pen pen, PointF[] decagono, PointF[] pentSup, PointF[] pentInf)
+        {
+            // Conectar pentágono superior con vértices del decágono (alternados)
+            for (int i = 0; i < 5; i++)
+            {
+                int idx = i * 2 + 1; // Vértices impares del decágono
+                g.DrawLine(pen, pentSup[i], decagono[idx]);
+            }
+
+            // Conectar pentágono inferior con vértices del decágono (alternados)
+            for (int i = 0; i < 5; i++)
+            {
+                int idx = i * 2; // Vértices pares del decágono
+                g.DrawLine(pen, pentInf[i], decagono[idx]);
+            }
+
+            // Conectar entre los dos pentágonos
+            for (int i = 0; i < 5; i++)
+            {
+                g.DrawLine(pen, pentSup[i], pentInf[i]);
+            }
+        }
+
+        public void DibujarGema(PictureBox picCanvas, CTransformation transform)
+        {
+            if (mAltura <= 0)
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para la altura de la gema.");
+                return;
+            }
+
+            // Asegurar que haya un Bitmap persistente en el PictureBox
+            if (picCanvas.Image == null || picCanvas.Image.Width != picCanvas.Width || picCanvas.Image.Height != picCanvas.Height)
+            {
+                picCanvas.Image?.Dispose();
+                picCanvas.Image = new Bitmap(Math.Max(1, picCanvas.Width), Math.Max(1, picCanvas.Height));
+            }
+
+            using (Graphics g = Graphics.FromImage(picCanvas.Image))
+            {
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Guardar estado antes de aplicar transformaciones
+                GraphicsState state = g.Save();
+
+                if (transform != null)
+                {
+                    transform.ApplyTransforms(g);
+                }
+
+                // Calcular todos los vértices
+                PointF[] decagono = CalcularDecagonoExterior();
+                PointF[] pentagonoSup = CalcularPentagonoSuperior();
+                PointF[] pentagonoInf = CalcularPentagonoInferior();
+
+                // Aplicar offset si no hay transformación
+                if (transform == null)
+                {
+                    float offsetX = picCanvas.Width / 2;
+                    float offsetY = picCanvas.Height / 2;
+
+                    for (int i = 0; i < decagono.Length; i++)
+                    {
+                        decagono[i].X = SF * decagono[i].X + offsetX;
+                        decagono[i].Y = SF * decagono[i].Y + offsetY;
+                    }
+
+                    for (int i = 0; i < pentagonoSup.Length; i++)
+                    {
+                        pentagonoSup[i].X = SF * pentagonoSup[i].X + offsetX;
+                        pentagonoSup[i].Y = SF * pentagonoSup[i].Y + offsetY;
+                    }
+
+                    for (int i = 0; i < pentagonoInf.Length; i++)
+                    {
+                        pentagonoInf[i].X = SF * pentagonoInf[i].X + offsetX;
+                        pentagonoInf[i].Y = SF * pentagonoInf[i].Y + offsetY;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < decagono.Length; i++)
+                    {
+                        decagono[i].X = SF * decagono[i].X;
+                        decagono[i].Y = SF * decagono[i].Y;
+                    }
+
+                    for (int i = 0; i < pentagonoSup.Length; i++)
+                    {
+                        pentagonoSup[i].X = SF * pentagonoSup[i].X;
+                        pentagonoSup[i].Y = SF * pentagonoSup[i].Y;
+                    }
+
+                    for (int i = 0; i < pentagonoInf.Length; i++)
+                    {
+                        pentagonoInf[i].X = SF * pentagonoInf[i].X;
+                        pentagonoInf[i].Y = SF * pentagonoInf[i].Y;
+                    }
+                }
+
+                // Dibujar el decágono exterior
+                mPen = new Pen(Color.Blue, 2);
+                g.DrawPolygon(mPen, decagono);
+
+                // Dibujar los pentágonos interiores
+                mPen.Color = Color.Red;
+                g.DrawPolygon(mPen, pentagonoSup);
+                g.DrawPolygon(mPen, pentagonoInf);
+
+                // Dibujar las conexiones
+                mPen.Color = Color.Green;
+                mPen.Width = 1;
+                DibujarConexiones(g, mPen, decagono, pentagonoSup, pentagonoInf);
+
+                g.Restore(state);
+            }
+            picCanvas.Refresh();
+        }
+
+        public void CloseForm(Form form)
+        {
+            form.Close();
+        }
+    }
+}

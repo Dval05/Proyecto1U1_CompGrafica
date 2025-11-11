@@ -11,3 +11,17 @@ C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.exe
 C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.pdb
 C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.exe.config
 C:\Users\andra\source\repos\ProyectoP1\obj\Debug\ProyectoP1.frmEstrellaGeometrica.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\bin\Debug\ProyectoP1.exe.config
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\bin\Debug\ProyectoP1.exe
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\bin\Debug\ProyectoP1.pdb
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.csproj.AssemblyReference.cache
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.exe.config
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.fmrGema.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.Form1.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.frmEstrellaGeometrica.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.frmPoligonoEstrellado.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.Properties.Resources.resources
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.csproj.GenerateResource.cache
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.csproj.CoreCompileInputs.cache
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.exe
+C:\Users\Sjean\Desktop\Universidad ESPE\Quinto Semestre Ing.Software\Computacion Grafica\Primer Parcial\Proyecto1U1_CompGrafica\ProyectoP1\obj\Debug\ProyectoP1.pdb
