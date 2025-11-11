@@ -3,15 +3,23 @@
   "WorkspaceRootPath": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\cgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|c:\\users\\sjean\\desktop\\universidad espe\\quinto semestre ing.software\\computacion grafica\\primer parcial\\proyecto1u1_compgrafica\\proyectop1\\cgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:cgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:fmrgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\frmestrellageometrica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:frmestrellageometrica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|c:\\users\\sjean\\desktop\\universidad espe\\quinto semestre ing.software\\computacion grafica\\primer parcial\\proyecto1u1_compgrafica\\proyectop1\\cestrellageometrica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\cestrellageometrica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:cestrellageometrica.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -31,14 +39,6 @@
       "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:frmpoligonoestrellado.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:fmrgema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrgema.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{458BB2A5-E5BE-4C8C-A2E4-754C85ACA5DF}|ProyectoP1.csproj|solutionrelative:fmrgema.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -50,11 +50,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "frmPoligonoEstrellado.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\frmPoligonoEstrellado.cs",
               "RelativeDocumentMoniker": "frmPoligonoEstrellado.cs",
@@ -66,6 +66,20 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CGema.cs",
+              "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\CGema.cs",
+              "RelativeDocumentMoniker": "CGema.cs",
+              "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\CGema.cs*",
+              "RelativeToolTip": "CGema.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-11T14:45:48.894Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "fmrGema.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrGema.Designer.cs",
@@ -74,59 +88,50 @@
               "RelativeToolTip": "fmrGema.Designer.cs",
               "ViewState": "AgIAADgBAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T14:47:36.861Z"
+              "WhenOpened": "2025-11-11T14:47:36.861Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "fmrGema.cs",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrGema.cs",
               "RelativeDocumentMoniker": "fmrGema.cs",
               "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrGema.cs",
               "RelativeToolTip": "fmrGema.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAEBVwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T14:46:34.736Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CGema.cs",
-              "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\CGema.cs",
-              "RelativeDocumentMoniker": "CGema.cs",
-              "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\CGema.cs",
-              "RelativeToolTip": "CGema.cs",
-              "ViewState": "AgIAALsAAAAAAAAAAAAvwIEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T14:45:48.894Z",
+              "WhenOpened": "2025-11-11T14:46:34.736Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\Form1.cs",
               "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T14:42:51.389Z"
+              "WhenOpened": "2025-11-11T14:42:51.389Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "fmrGema.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrGema.cs",
               "RelativeDocumentMoniker": "fmrGema.cs",
               "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\fmrGema.cs [Design]",
               "RelativeToolTip": "fmrGema.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-11T14:40:06.503Z"
+              "WhenOpened": "2025-11-11T14:40:06.503Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "CEstrellaGeometrica.cs",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\CEstrellaGeometrica.cs",
               "RelativeDocumentMoniker": "CEstrellaGeometrica.cs",
@@ -134,35 +139,34 @@
               "RelativeToolTip": "CEstrellaGeometrica.cs",
               "ViewState": "AgIAAF0AAAAAAAAAAAAowBAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T15:58:39.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-09T15:58:39.057Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "frmEstrellaGeometrica.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\frmEstrellaGeometrica.cs",
               "RelativeDocumentMoniker": "frmEstrellaGeometrica.cs",
               "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\frmEstrellaGeometrica.cs [Design]",
               "RelativeToolTip": "frmEstrellaGeometrica.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T15:58:20.171Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-11-09T15:58:20.171Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\Form1.cs [Design]",
               "RelativeToolTip": "Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-08T22:02:37.806Z"
+              "WhenOpened": "2025-11-08T22:02:37.806Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "frmPoligonoEstrellado.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Sjean\\Desktop\\Universidad ESPE\\Quinto Semestre Ing.Software\\Computacion Grafica\\Primer Parcial\\Proyecto1U1_CompGrafica\\ProyectoP1\\frmPoligonoEstrellado.Designer.cs",
               "RelativeDocumentMoniker": "frmPoligonoEstrellado.Designer.cs",
