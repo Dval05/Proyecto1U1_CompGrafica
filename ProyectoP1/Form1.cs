@@ -46,6 +46,7 @@ namespace ProyectoP1
         private void pentagonoEstrellado5PuntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura2
+            OpenChild<frmPentagonoEstrellado>();
         }
 
         private void gemaDe10LadosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,6 +69,7 @@ namespace ProyectoP1
         private void florGeométricaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura6
+            OpenChild<frmFlor>();
         }
     }
 }

@@ -1,0 +1,15 @@
+# Carpeta de Visual Studio
+.vs/
+
+# Compilación
+bin/
+obj/
+
+# Configuraciones locales
+*.user
+*.suo
+*.cache
+
+# Archivos temporales
+*.log
+*.tmp
