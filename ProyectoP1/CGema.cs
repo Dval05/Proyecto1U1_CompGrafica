@@ -11,6 +11,7 @@ namespace ProyectoP1
 {
     internal class CGema
     {
+<<<<<<< HEAD
         // Datos Miembro (Atributos).
 
         // Lado del decágono.
@@ -40,6 +41,16 @@ namespace ProyectoP1
         private PointF P1, P2, P3, P4, P5, P6, P7, P8, P9, P10;
         private PointF P11, P12, P13, P14, P15, P16, P17, P18, P19, P20;
         private PointF P21, P22, P23, P24, P25;
+=======
+        // CONSTANTES DE DISEï¿½O
+        private const int NUM_VERTICES_DECAGONO = 10;
+        private const float ANGULO_INICIAL = -90f; // Vï¿½rtice apuntando hacia arriba
+        private const float ANGULO_ENTRE_VERTICES = 36f; // 360/10
+        private const float FACTOR_DECAGONO_INTERNO = 0.92f; // 92% del exterior
+        private const float FACTOR_CIRCULO_CENTRAL = 0.09f; // 9% del radio total
+        private const float ALTURA_TRIANGULO_FACTOR = 0.1f; // Factor para la altura del triï¿½ngulo (3% del radio)
+        private const float SF = 1; // Factor de escalamiento
+>>>>>>> a4cf261a27b100f13ca0a495e142dbc91ecfede9
 
 
         public CGema()
@@ -62,7 +73,7 @@ namespace ProyectoP1
             catch
             {
                 respuesta = false;
-                MessageBox.Show("Ingrese Datos válidos...!", "ERROR!");
+                MessageBox.Show("Ingrese Datos vï¿½lidos...!", "ERROR!");
             }
 
             return respuesta;
@@ -76,11 +87,147 @@ namespace ProyectoP1
             picCanvas.Refresh();
         }
 
+<<<<<<< HEAD
+=======
+        // Mï¿½TODO GENERALIZADO: Calcula los vï¿½rtices de un decï¿½gono con un factor de radio
+        private PointF[] CalcularDecagono(float factorRadio)
+        {
+            PointF[] vertices = new PointF[NUM_VERTICES_DECAGONO];
+            float radio = (mAltura / 2) * factorRadio;
+
+            for (int i = 0; i < NUM_VERTICES_DECAGONO; i++)
+            {
+                float angle = (ANGULO_INICIAL + i * ANGULO_ENTRE_VERTICES) * (float)Math.PI / 180.0f;
+                vertices[i] = new PointF(
+                    radio * (float)Math.Cos(angle),
+                    radio * (float)Math.Sin(angle)
+                );
+            }
+
+            return vertices;
+        }
+
+        // PASO 1: Calcula los vï¿½rtices del decï¿½gono exterior (usa factor 1.0)
+        private PointF[] CalcularDecagonoExterior()
+        {
+            return CalcularDecagono(1.0f);
+        }
+
+        // PASO 2: Calcula los vï¿½rtices del decï¿½gono interno (usa factor 0.92)
+        private PointF[] CalcularDecagonoInterno()
+        {
+            return CalcularDecagono(FACTOR_DECAGONO_INTERNO);
+        }
+
+        // Mï¿½TODO AUXILIAR: Aplica offset y escala a un array de puntos
+        private void AplicarOffsetYEscala(PointF[] vertices, PictureBox picCanvas, CTransformation transform)
+        {
+            if (transform == null)
+            {
+                // Sin transformaciï¿½n: centrar en el canvas
+                float offsetX = picCanvas.Width / 2;
+                float offsetY = picCanvas.Height / 2;
+
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    vertices[i].X = SF * vertices[i].X + offsetX;
+                    vertices[i].Y = SF * vertices[i].Y + offsetY;
+                }
+            }
+            else
+            {
+                // Con transformaciï¿½n: mantener en origen
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    vertices[i].X = SF * vertices[i].X;
+                    vertices[i].Y = SF * vertices[i].Y;
+                }
+            }
+        }
+
+        // PASO 3: Dibuja lï¿½neas conectando los vï¿½rtices correspondientes entre decï¿½gonos
+        private void DibujarConexionesDecagonos(Graphics g, Pen pen, PointF[] decagonoExt, PointF[] decagonoInt)
+        {
+            for (int i = 0; i < NUM_VERTICES_DECAGONO; i++)
+            {
+                g.DrawLine(pen, decagonoExt[i], decagonoInt[i]);
+            }
+        }
+
+        // PASO 4: Dibuja el cï¿½rculo central
+        private void DibujarCirculoCentral(Graphics g, Pen pen, PointF centro, CTransformation transform)
+        {
+            float radioCentral = (mAltura / 2) * FACTOR_CIRCULO_CENTRAL;
+            
+            RectangleF rect;
+            
+            if (transform == null)
+            {
+                rect = new RectangleF(
+                    centro.X - radioCentral,
+                    centro.Y - radioCentral,
+                    radioCentral * 2,
+                    radioCentral * 2
+                );
+            }
+            else
+            {
+                rect = new RectangleF(
+                    -radioCentral,
+                    -radioCentral,
+                    radioCentral * 2,
+                    radioCentral * 2
+                );
+            }
+            
+            g.DrawEllipse(pen, rect);
+        }
+
+        // PASO 3.5: Dibuja triï¿½ngulos pequeï¿½os en el punto medio de cada lado del decï¿½gono interno
+        private void DibujarTriangulosDecagonoInterno(Graphics g, Pen pen, PointF[] decagonoInt)
+        {
+            float alturaTriangulo = (mAltura / 2) * ALTURA_TRIANGULO_FACTOR;
+
+            for (int i = 0; i < NUM_VERTICES_DECAGONO; i++)
+            {
+                // Obtener el lado actual y el siguiente vï¿½rtice
+                PointF p1 = decagonoInt[i];
+                PointF p2 = decagonoInt[(i + 1) % NUM_VERTICES_DECAGONO];
+
+                // Calcular el punto medio del lado
+                PointF puntoMedio = new PointF(
+                    (p1.X + p2.X) / 2,
+                    (p1.Y + p2.Y) / 2
+                );
+
+                // Calcular el vector del lado
+                float dx = p2.X - p1.X;
+                float dy = p2.Y - p1.Y;
+
+                // Calcular la perpendicular hacia afuera (normal)
+                // Giramos 90 grados a la derecha y normalizamos
+                float longitud = (float)Math.Sqrt(dx * dx + dy * dy);
+                float normalX = -dy / longitud;
+                float normalY = dx / longitud;
+
+                // El ï¿½pice del triï¿½ngulo estï¿½ hacia afuera del decï¿½gono
+                PointF apice = new PointF(
+                    puntoMedio.X + normalX * alturaTriangulo,
+                    puntoMedio.Y + normalY * alturaTriangulo
+                );
+
+                // Dibujar el triï¿½ngulo
+                PointF[] triangulo = new PointF[] { p1, apice, p2 };
+                g.DrawPolygon(pen, triangulo);
+            }
+        }
+
+>>>>>>> a4cf261a27b100f13ca0a495e142dbc91ecfede9
         public void DibujarGema(PictureBox picCanvas, CTransformation transform)
         {
             if (side <= 0)
             {
-                MessageBox.Show("Por favor, ingrese un valor válido para la altura de la gema.");
+                MessageBox.Show("Por favor, ingrese un valor vï¿½lido para la altura de la gema.");
                 return;
             }
 
@@ -100,7 +247,49 @@ namespace ProyectoP1
 
             if (transform != null)
             {
+<<<<<<< HEAD
                 transform.ApplyTransforms(graph);
+=======
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Guardar estado antes de aplicar transformaciones
+                GraphicsState state = g.Save();
+
+                if (transform != null)
+                {
+                    transform.ApplyTransforms(g);
+                }
+
+                // Calcular el centro para el cï¿½rculo
+                PointF centro = (transform == null) 
+                    ? new PointF(picCanvas.Width / 2, picCanvas.Height / 2) 
+                    : new PointF(0, 0);
+
+                // PASO 1: Calcular y aplicar offset al decï¿½gono exterior
+                PointF[] decagono = CalcularDecagonoExterior();
+                AplicarOffsetYEscala(decagono, picCanvas, transform);
+
+                // PASO 2: Calcular y aplicar offset al decï¿½gono interno
+                PointF[] decagonoInterno = CalcularDecagonoInterno();
+                AplicarOffsetYEscala(decagonoInterno, picCanvas, transform);
+
+                // Dibujar los decï¿½gonos
+                mPen = new Pen(Color.Black, 2);
+                g.DrawPolygon(mPen, decagono);
+                g.DrawPolygon(mPen, decagonoInterno);
+
+                // PASO 3: Dibujar las lï¿½neas de conexiï¿½n entre los vï¿½rtices
+                DibujarConexionesDecagonos(g, mPen, decagono, decagonoInterno);
+
+                // PASO 3.5: Dibujar triï¿½ngulos en cada lado del decï¿½gono interno
+                DibujarTriangulosDecagonoInterno(g, mPen, decagonoInterno);
+
+                // PASO 4: Dibujar el cï¿½rculo central
+                DibujarCirculoCentral(g, mPen, centro, transform);
+
+                g.Restore(state);
+>>>>>>> a4cf261a27b100f13ca0a495e142dbc91ecfede9
             }
 
             pen = new Pen(Color.Black, 2);

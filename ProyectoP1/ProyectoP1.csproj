@@ -47,9 +47,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CEstrellaGeometrica.cs" />
+    <Compile Include="CFlor.cs" />
+    <Compile Include="CPentagonoEstrellado.cs" />
     <Compile Include="CGema.cs" />
     <Compile Include="CPoligonoEstrellado.cs" />
     <Compile Include="CTransformation.cs" />
+    <Compile Include="frmFlor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFlor.Designer.cs">
+      <DependentUpon>frmFlor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPentagonoEstrellado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPentagonoEstrellado.Designer.cs">
+      <DependentUpon>frmPentagonoEstrellado.cs</DependentUpon>
+    </Compile>
     <Compile Include="fmrGema.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +90,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmFlor.resx">
+      <DependentUpon>frmFlor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPentagonoEstrellado.resx">
+      <DependentUpon>frmPentagonoEstrellado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fmrGema.resx">
       <DependentUpon>fmrGema.cs</DependentUpon>
     </EmbeddedResource>
