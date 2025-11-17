@@ -1,0 +1,453 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ProyectoP1
+{
+    internal class CGema
+    {
+        // Datos Miembro (Atributos).
+
+        // Lado del decágono.
+        private float side;
+        // Segmentos del decágono.
+        private float a, b, c, d;
+        // Ángulos del decágono.
+        private float angle1, angle2;
+        // Objeto que activa el modo gráfico.
+        private Graphics graph;
+        SolidBrush whiteBrush;
+        // Objeto bolígrafo para dibujar en un lienzo.
+        private Pen pen;
+        // Constante scale factor (Zoom In/Zoom Out).
+        public float SF;
+        // Objeto Punto que representa a los diez vértices del decágono interior.
+        private PointF A, B, C, D, E, F, G, H, I, J, O;
+        // Objeto Punto que representa a los diez vértices del decágono interior.
+        private PointF A2, B2, C2, D2, E2, F2, G2, H2, I2, J2;
+        // Objeto Punto que representa a los vértices de pentagono interior.
+        private PointF K, M, N, P, Q, R, S, T, U, V;
+        // Objeto Punto que representa a los vértices al interior de la estrella mayor.
+        private PointF A1, B1, C1, D1, E1;
+        private PointF Ks, Ms, Ns, Ps, Qs, Rs, Ss, Ts, Us, Vs;
+        private PointF Ki, Mi, Ni, Pi, Qi, Ri, Si, Ti, Ui, Vi;
+        // Objeto Punto que representa a los vértices las linas interiores.
+        private PointF P1, P2, P3, P4, P5, P6, P7, P8, P9, P10;
+        private PointF P11, P12, P13, P14, P15, P16, P17, P18, P19, P20;
+        private PointF P21, P22, P23, P24, P25;
+
+
+        public CGema()
+        {
+            side = 0.0f;
+            SF = 1.0f;
+        }
+
+        public bool ReadData(TextBox txtSide)
+        {
+            bool respuesta = true;
+            try
+            {
+                side = float.Parse(txtSide.Text);
+                if (side <= 0.0f)
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                respuesta = false;
+                MessageBox.Show("Ingrese Datos válidos...!", "ERROR!");
+            }
+
+            return respuesta;
+        }
+
+        public void InitializeData(TextBox txtSide, PictureBox picCanvas)
+        {
+            side = 0.0f;
+            txtSide.Text = "";
+            txtSide.Focus();
+            picCanvas.Refresh();
+        }
+
+        public void DibujarGema(PictureBox picCanvas, CTransformation transform)
+        {
+            if (side <= 0)
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para la altura de la gema.");
+                return;
+            }
+
+            // Asegurar que haya un Bitmap persistente en el PictureBox
+            if (picCanvas.Image == null || picCanvas.Image.Width != picCanvas.Width || picCanvas.Image.Height != picCanvas.Height)
+            {
+                picCanvas.Image?.Dispose();
+                picCanvas.Image = new Bitmap(Math.Max(1, picCanvas.Width), Math.Max(1, picCanvas.Height));
+            }
+
+            graph = Graphics.FromImage(picCanvas.Image);
+            graph.Clear(Color.White);
+            graph.SmoothingMode = SmoothingMode.AntiAlias;
+
+            // Guardar estado antes de aplicar transformaciones
+            GraphicsState state = graph.Save();
+
+            if (transform != null)
+            {
+                transform.ApplyTransforms(graph);
+            }
+
+            pen = new Pen(Color.Black, 2);
+
+            // Llamar al método de dibujo
+            PlotFigures();
+
+            graph.Restore(state);
+            graph.Dispose();
+            
+            picCanvas.Refresh();
+        }
+
+        public void CloseForm(Form form)
+        {
+            form.Close();
+        }
+
+        // Función que calcula los valores de los diez vértices del decágono interior.
+        private void CalculateVertexInterDecagon()
+        {
+            angle1 = 18.0f * (float)Math.PI / 180.0f;
+            angle2 = 36.0f * (float)Math.PI / 180.0f;
+            a = side * (float)Math.Sin(angle2);
+            b = side * (float)Math.Cos(angle1);
+            c = side * (float)Math.Sin(angle1);
+            d = side * (float)Math.Cos(angle2);
+            A.X = a + b; A.Y = 0;
+            B.X = a + 2 * b; B.Y = c;
+            C.X = 2 * a + 2 * b; C.Y = c + d;
+            D.X = 2 * a + 2 * b; D.Y = c + d + side;
+            E.X = a + 2 * b; E.Y = c + 2 * d + side;
+            F.X = a + b; F.Y = 2 * c + 2 * d + side;
+            G.X = a; G.Y = c + 2 * d + side;
+            H.X = 0; H.Y = c + d + side;
+            I.X = 0; I.Y = c + d;
+            J.X = a; J.Y = c;
+            Ps.X = a + 2 * b; Ps.Y = c + d + side + (d / 2.0f);
+            Ss.X = a; Ss.Y = c + d + side + (d / 2.0f);
+            O.X = a + b; O.Y = c + d + (side / 2.0f);
+        }
+
+        // Función que calcula el punto de intersección entre dos rectas utilizando el Teorema 1.
+        private PointF CalculateIntersectionPoint(PointF P1, PointF P2, PointF P3, PointF P4)
+        {
+            PointF P = new PointF();
+            float m1 = (P2.Y - P1.Y) / (P2.X - P1.X);
+            float m2 = (P4.Y - P3.Y) / (P4.X - P3.X);
+
+            if ((m1 - m2) != 0)
+            {
+                P.X = (P3.Y - P1.Y + m1 * P1.X - m2 * P3.X) / (m1 - m2);
+                P.Y = P1.Y + m1 * (P.X - P1.X);
+            }
+            return (P);
+        }
+
+        // Función que calcula los valores de los vértices del pentagono interior.
+        private void CalculateVertexPentagon()
+        {
+            K = CalculateIntersectionPoint(A, C, B, J);
+            M = CalculateIntersectionPoint(B, D, A, C);
+            N = CalculateIntersectionPoint(B, D, C, E);
+            P = CalculateIntersectionPoint(C, E, D, F);
+            Q = CalculateIntersectionPoint(D, F, E, G);
+            R = CalculateIntersectionPoint(F, H, E, G);
+            S = CalculateIntersectionPoint(G, I, F, H);
+            T = CalculateIntersectionPoint(H, J, G, I);
+            U = CalculateIntersectionPoint(H, J, A, I);
+            V = CalculateIntersectionPoint(B, J, A, I);
+            Ks = CalculateIntersectionPoint(A, D, B, J);
+            Ms = CalculateIntersectionPoint(B, D, C, J);
+            Ns = CalculateIntersectionPoint(B, D, C, F);
+            Qs = CalculateIntersectionPoint(D, F, E, H);
+            Rs = CalculateIntersectionPoint(F, H, D, G);
+            Ts = CalculateIntersectionPoint(H, J, F, I);
+            Us = CalculateIntersectionPoint(H, J, B, I);
+            Vs = CalculateIntersectionPoint(B, J, A, H);
+        }
+
+        // Función que calcula los valores de los vértices de la estrella interior mayor.
+        private void CalculateVertexInteriorStarM()
+        {
+            A1 = CalculateIntersectionPoint(N, V, K, T);
+            B1 = CalculateIntersectionPoint(N, V, M, Q);
+            C1 = CalculateIntersectionPoint(M, Q, P, S);
+            D1 = CalculateIntersectionPoint(R, U, P, S);
+            E1 = CalculateIntersectionPoint(K, T, R, U);
+        }
+
+        private void CalculateVertexInteriorStarI()
+        {
+            Ki = CalculateIntersectionPoint(K, A1, Ks, O);
+            Mi = CalculateIntersectionPoint(M, B1, Ms, O);
+            Ni = CalculateIntersectionPoint(N, B1, Ns, O);
+            Pi = CalculateIntersectionPoint(P, C1, Ps, O);
+            Qi = CalculateIntersectionPoint(Q, C1, Qs, O);
+            Ri = CalculateIntersectionPoint(R, D1, Rs, O);
+            Si = CalculateIntersectionPoint(S, D1, Ss, O);
+            Ti = CalculateIntersectionPoint(T, E1, Ts, O);
+            Ui = CalculateIntersectionPoint(U, E1, Us, O);
+            Vi = CalculateIntersectionPoint(V, A1, Vs, O);
+        }
+
+
+        //Función que calcula los valores de los vértices de las lineas interiores.
+        private void CalculateVertexInteriorLines()
+        {
+            P1 = CalculateIntersectionPoint(B, I, K, O);
+            P2 = CalculateIntersectionPoint(C, J, M, O);
+            P3 = CalculateIntersectionPoint(A, D, N, O);
+            P4 = CalculateIntersectionPoint(D, G, P, O);
+            P5 = CalculateIntersectionPoint(C, F, Q, O);
+            P6 = CalculateIntersectionPoint(F, I, R, O);
+            P7 = CalculateIntersectionPoint(E, H, S, O);
+            P8 = CalculateIntersectionPoint(A, H, T, O);
+            P9 = CalculateIntersectionPoint(B, I, U, O);
+            P10 = CalculateIntersectionPoint(C, J, V, O);
+            P11 = CalculateIntersectionPoint(B, H, K, O);
+            P12 = CalculateIntersectionPoint(B, F, M, O);
+            P13 = CalculateIntersectionPoint(D, J, N, O);
+            P14 = CalculateIntersectionPoint(D, H, P, O);
+            P15 = CalculateIntersectionPoint(B, F, Q, O);
+            P16 = CalculateIntersectionPoint(F, J, R, O);
+            P17 = CalculateIntersectionPoint(D, H, S, O);
+            P18 = CalculateIntersectionPoint(B, H, T, O);
+            P19 = CalculateIntersectionPoint(K, T, U, O);
+            P20 = CalculateIntersectionPoint(D, J, V, O);
+
+            P21 = CalculateIntersectionPoint(A, E, B, O);
+            P22 = CalculateIntersectionPoint(C, G, D, O);
+            P23 = CalculateIntersectionPoint(E, I, C, G);
+            P24 = CalculateIntersectionPoint(A, G, H, O);
+            P25 = CalculateIntersectionPoint(C, I, J, O);
+        }
+
+        // Función que grafica las estrellas poligonales de 10 puntas
+        private void PlotFigures()
+        {
+            CalculateVertexInterDecagon();
+            CalculateVertexPentagon();
+            CalculateVertexInteriorStarM();
+            CalculateVertexInteriorStarI();
+            CalculateVertexInteriorLines();
+
+            // Aplicar escala y offset para centrar (sin transformaciones hardcodeadas)
+            A.X = A.X * SF; A.Y = (-1) * A.Y * SF;
+            B.X = B.X * SF; B.Y = (-1) * B.Y * SF;
+            C.X = C.X * SF; C.Y = (-1) * C.Y * SF;
+            D.X = D.X * SF; D.Y = (-1) * D.Y * SF;
+            E.X = E.X * SF; E.Y = (-1) * E.Y * SF;
+            F.X = F.X * SF; F.Y = (-1) * F.Y * SF;
+            G.X = G.X * SF; G.Y = (-1) * G.Y * SF;
+            H.X = H.X * SF; H.Y = (-1) * H.Y * SF;
+            I.X = I.X * SF; I.Y = (-1) * I.Y * SF;
+            J.X = J.X * SF; J.Y = (-1) * J.Y * SF;
+            O.X = O.X * SF; O.Y = (-1) * O.Y * SF;
+            
+            A2.X = A.X; A2.Y = (A.Y + 10.0f);
+            B2.X = (B.X + 8.0f); B2.Y = (B.Y + 8.0f);
+            C2.X = (C.X + 10.0f); C2.Y = C.Y;
+            D2.X = (D.X + 10.0f); D2.Y = D.Y;
+            E2.X = (E.X + 8.0f); E2.Y = (E.Y - 8.0f);
+            F2.X = F.X; F2.Y = (F.Y - 10.0f);
+            G2.X = (G.X - 8.0f); G2.Y = (G.Y - 8.0f);
+            H2.X = (H.X - 10.0f); H2.Y = H.Y;
+            I2.X = (I.X - 10.0f); I2.Y = I.Y;
+            J2.X = (J.X - 8.0f); J2.Y = (J.Y + 8.0f);
+            
+            A1.X = A1.X * SF; A1.Y = (-1) * A1.Y * SF;
+            B1.X = B1.X * SF; B1.Y = (-1) * B1.Y * SF;
+            C1.X = C1.X * SF; C1.Y = (-1) * C1.Y * SF;
+            D1.X = D1.X * SF; D1.Y = (-1) * D1.Y * SF;
+            E1.X = E1.X * SF; E1.Y = (-1) * E1.Y * SF;
+            
+            K.X = K.X * SF; K.Y = (-1) * K.Y * SF;
+            M.X = M.X * SF; M.Y = (-1) * M.Y * SF;
+            N.X = N.X * SF; N.Y = (-1) * N.Y * SF;
+            P.X = P.X * SF; P.Y = (-1) * P.Y * SF;
+            Q.X = Q.X * SF; Q.Y = (-1) * Q.Y * SF;
+            R.X = R.X * SF; R.Y = (-1) * R.Y * SF;
+            S.X = S.X * SF; S.Y = (-1) * S.Y * SF;
+            T.X = T.X * SF; T.Y = (-1) * T.Y * SF;
+            U.X = U.X * SF; U.Y = (-1) * U.Y * SF;
+            V.X = V.X * SF; V.Y = (-1) * V.Y * SF;
+            
+            Ks.X = Ks.X * SF; Ks.Y = (-1) * Ks.Y * SF;
+            Ms.X = Ms.X * SF; Ms.Y = (-1) * Ms.Y * SF;
+            Ns.X = Ns.X * SF; Ns.Y = (-1) * Ns.Y * SF;
+            Ps.X = Ps.X * SF; Ps.Y = (-1) * Ps.Y * SF;
+            Qs.X = Qs.X * SF; Qs.Y = (-1) * Qs.Y * SF;
+            Rs.X = Rs.X * SF; Rs.Y = (-1) * Rs.Y * SF;
+            Ss.X = Ss.X * SF; Ss.Y = (-1) * Ss.Y * SF;
+            Ts.X = Ts.X * SF; Ts.Y = (-1) * Ts.Y * SF;
+            Us.X = Us.X * SF; Us.Y = (-1) * Us.Y * SF;
+            Vs.X = Vs.X * SF; Vs.Y = (-1) * Vs.Y * SF;
+            
+            Ki.X = Ki.X * SF; Ki.Y = (-1) * Ki.Y * SF;
+            Mi.X = Mi.X * SF; Mi.Y = (-1) * Mi.Y * SF;
+            Ni.X = Ni.X * SF; Ni.Y = (-1) * Ni.Y * SF;
+            Pi.X = Pi.X * SF; Pi.Y = (-1) * Pi.Y * SF;
+            Qi.X = Qi.X * SF; Qi.Y = (-1) * Qi.Y * SF;
+            Ri.X = Ri.X * SF; Ri.Y = (-1) * Ri.Y * SF;
+            Si.X = Si.X * SF; Si.Y = (-1) * Si.Y * SF;
+            Ti.X = Ti.X * SF; Ti.Y = (-1) * Ti.Y * SF;
+            Ui.X = Ui.X * SF; Ui.Y = (-1) * Ui.Y * SF;
+            Vi.X = Vi.X * SF; Vi.Y = (-1) * Vi.Y * SF;
+            
+            P1.X = P1.X * SF; P1.Y = (-1) * P1.Y * SF;
+            P2.X = P2.X * SF; P2.Y = (-1) * P2.Y * SF;
+            P3.X = P3.X * SF; P3.Y = (-1) * P3.Y * SF;
+            P4.X = P4.X * SF; P4.Y = (-1) * P4.Y * SF;
+            P5.X = P5.X * SF; P5.Y = (-1) * P5.Y * SF;
+            P6.X = P6.X * SF; P6.Y = (-1) * P6.Y * SF;
+            P7.X = P7.X * SF; P7.Y = (-1) * P7.Y * SF;
+            P8.X = P8.X * SF; P8.Y = (-1) * P8.Y * SF;
+            P9.X = P9.X * SF; P9.Y = (-1) * P9.Y * SF;
+            P10.X = P10.X * SF; P10.Y = (-1) * P10.Y * SF;
+            P11.X = P11.X * SF; P11.Y = (-1) * P11.Y * SF;
+            P12.X = P12.X * SF; P12.Y = (-1) * P12.Y * SF;
+            P13.X = P13.X * SF; P13.Y = (-1) * P13.Y * SF;
+            P14.X = P14.X * SF; P14.Y = (-1) * P14.Y * SF;
+            P15.X = P15.X * SF; P15.Y = (-1) * P15.Y * SF;
+            P16.X = P16.X * SF; P16.Y = (-1) * P16.Y * SF;
+            P17.X = P17.X * SF; P17.Y = (-1) * P17.Y * SF;
+            P18.X = P18.X * SF; P18.Y = (-1) * P18.Y * SF;
+            P19.X = P19.X * SF; P19.Y = (-1) * P19.Y * SF;
+            P20.X = P20.X * SF; P20.Y = (-1) * P20.Y * SF;
+            P21.X = P21.X * SF; P21.Y = (-1) * P21.Y * SF;
+            P22.X = P22.X * SF; P22.Y = (-1) * P22.Y * SF;
+            P23.X = P23.X * SF; P23.Y = (-1) * P23.Y * SF;
+            P24.X = P24.X * SF; P24.Y = (-1) * P24.Y * SF;
+            P25.X = P25.X * SF; P25.Y = (-1) * P25.Y * SF;
+
+            // Todas las líneas en color negro
+            pen = new Pen(Color.Black);
+            PointF[] polBigDecagon = { A2, B2, C2, D2, E2, F2, G2, H2, I2, J2, A2 };
+            graph.DrawPolygon(pen, polBigDecagon);
+            graph.DrawLine(pen, A, A2);
+            graph.DrawLine(pen, B, B2);
+            graph.DrawLine(pen, C, C2);
+            graph.DrawLine(pen, D, D2);
+            graph.DrawLine(pen, E, E2);
+            graph.DrawLine(pen, F, F2);
+            graph.DrawLine(pen, G, G2);
+            graph.DrawLine(pen, H, H2);
+            graph.DrawLine(pen, I, I2);
+            graph.DrawLine(pen, J, J2);
+
+            // Se grafica la estrella interior mas grande - TODO EN NEGRO
+            PointF[] polInterStarM1 = { A, K, A1, V, A };
+            graph.DrawPolygon(pen, polInterStarM1);
+            graph.DrawLine(pen, A1, O);
+            graph.DrawLine(pen, A1, Ks);
+            graph.DrawLine(pen, A1, Vs);
+            PointF[] polInterStarM2 = { C, N, B1, M, C };
+            graph.DrawPolygon(pen, polInterStarM2);
+            graph.DrawLine(pen, B1, O);
+            graph.DrawLine(pen, B1, Ms);
+            graph.DrawLine(pen, B1, Ns);
+            PointF[] polInterStarM3 = { E, Q, C1, P, E };
+            graph.DrawPolygon(pen, polInterStarM3);
+            graph.DrawLine(pen, C1, O);
+            graph.DrawLine(pen, C1, Ps);
+            graph.DrawLine(pen, C1, Qs);
+            PointF[] polInterStarM4 = { G, S, D1, R, G };
+            graph.DrawPolygon(pen, polInterStarM4);
+            graph.DrawLine(pen, D1, O);
+            graph.DrawLine(pen, D1, Rs);
+            graph.DrawLine(pen, D1, Ss);
+            PointF[] polInterStarM5 = { I, U, E1, T, I };
+            graph.DrawPolygon(pen, polInterStarM5);
+            graph.DrawLine(pen, E1, O);
+            graph.DrawLine(pen, E1, Ts);
+            graph.DrawLine(pen, E1, Us);
+            PointF[] polInterStarM6 = { A, B, Ks, A };
+            graph.DrawPolygon(pen, polInterStarM6);
+            PointF[] polInterStarM7 = { B, C, Ms, B };
+            graph.DrawPolygon(pen, polInterStarM7);
+            PointF[] polInterStarM8 = { C, D, Ns, C };
+            graph.DrawPolygon(pen, polInterStarM8);
+            PointF[] polInterStarM9 = { D, E, Ps, D };
+            graph.DrawPolygon(pen, polInterStarM9);
+            PointF[] polInterStarM10 = { E, F, Qs, E };
+            graph.DrawPolygon(pen, polInterStarM10);
+            PointF[] polInterStarM11 = { F, G, Rs, F };
+            graph.DrawPolygon(pen, polInterStarM11);
+            PointF[] polInterStarM12 = { G, H, Ss, G };
+            graph.DrawPolygon(pen, polInterStarM12);
+            PointF[] polInterStarM13 = { H, I, Ts, H };
+            graph.DrawPolygon(pen, polInterStarM13);
+            PointF[] polInterStarM14 = { I, J, Us, I };
+            graph.DrawPolygon(pen, polInterStarM14);
+            PointF[] polInterStarM15 = { J, A, Vs, J };
+            graph.DrawPolygon(pen, polInterStarM15);
+            PointF[] polInterStarM16 = { K, O, Ki, K };
+            graph.DrawPolygon(pen, polInterStarM16);
+            PointF[] polInterStarM17 = { M, O, Mi, M };
+            graph.DrawPolygon(pen, polInterStarM17);
+            PointF[] polInterStarM18 = { N, O, Ni, N };
+            graph.DrawPolygon(pen, polInterStarM18);
+            PointF[] polInterStarM19 = { P, O, Pi, P };
+            graph.DrawPolygon(pen, polInterStarM19);
+            PointF[] polInterStarM20 = { Q, O, Qi, Q };
+            graph.DrawPolygon(pen, polInterStarM20);
+            PointF[] polInterStarM21 = { R, O, Ri, R };
+            graph.DrawPolygon(pen, polInterStarM21);
+            PointF[] polInterStarM22 = { S, O, Si, S };
+            graph.DrawPolygon(pen, polInterStarM22);
+            PointF[] polInterStarM23 = { T, O, Ti, T };
+            graph.DrawPolygon(pen, polInterStarM23);
+            PointF[] polInterStarM24 = { U, O, Ui, U };
+            graph.DrawPolygon(pen, polInterStarM24);
+            PointF[] polInterStarM25 = { V, O, Vi, V };
+            graph.DrawPolygon(pen, polInterStarM25);
+            graph.DrawLine(pen, P21, O);
+            graph.DrawLine(pen, P22, O);
+            graph.DrawLine(pen, P23, O);
+            graph.DrawLine(pen, P24, O);
+            graph.DrawLine(pen, P25, O);
+
+            // Se grafica las lineas interiores - TODO EN NEGRO
+            graph.DrawLine(pen, B, P1);
+            graph.DrawLine(pen, B, P2);
+            PointF[] polInterLines1 = { B, P11, P21, P12, B };
+            graph.DrawPolygon(pen, polInterLines1);
+            graph.DrawLine(pen, D, P3);
+            graph.DrawLine(pen, D, P4);
+            PointF[] polInterLines2 = { D, P13, P22, P14, D };
+            graph.DrawPolygon(pen, polInterLines2);
+            graph.DrawLine(pen, F, P5);
+            graph.DrawLine(pen, F, P6);
+            PointF[] polInterLines3 = { F, P15, P23, P16, F };
+            graph.DrawPolygon(pen, polInterLines3);
+            graph.DrawLine(pen, H, P7);
+            graph.DrawLine(pen, H, P8);
+            PointF[] polInterLines4 = { H, P17, P24, P18, H };
+            graph.DrawPolygon(pen, polInterLines4);
+            graph.DrawLine(pen, J, P9);
+            graph.DrawLine(pen, J, P10);
+            PointF[] polInterLines5 = { J, P19, P25, P20, J };
+            graph.DrawPolygon(pen, polInterLines5);
+
+            // Se grafica el circulo central con fondo blanco y borde negro
+            whiteBrush = new SolidBrush(Color.White);
+            graph.FillEllipse(whiteBrush, O.X - (1 * SF), O.Y - (1 * SF), 2 * SF, 2 * SF);
+            graph.DrawEllipse(pen, O.X - (1 * SF), O.Y - (1 * SF), 2 * SF, 2 * SF);
+        }
+    }
+}

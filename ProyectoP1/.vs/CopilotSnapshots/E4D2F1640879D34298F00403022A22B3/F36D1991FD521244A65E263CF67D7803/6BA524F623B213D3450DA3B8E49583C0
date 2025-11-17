@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ProyectoP1
+{
+    internal class CGema
+    {
+        // CONSTANTES DE DISEÑO
+        private const float SF = 1; // Factor de escalamiento
+
+        private float mAltura; // Altura de la gema
+        private Graphics mGraph;
+        private Pen mPen;
+
+        public CGema()
+        {
+            mAltura = 0.0f;
+        }
+
+        public bool ReadData(TextBox txtSide)
+        {
+            bool respuesta = true;
+            try
+            {
+                mAltura = float.Parse(txtSide.Text);
+                if (mAltura <= 0.0f)
+                {
+                    throw new Exception();
+                }
+            }
+            catch
+            {
+                respuesta = false;
+                MessageBox.Show("Ingrese Datos válidos...!", "ERROR!");
+            }
+
+            return respuesta;
+        }
+
+        public void InitializeData(TextBox txtSide, PictureBox picCanvas)
+        {
+            mAltura = 0.0f;
+            txtSide.Text = "";
+            txtSide.Focus();
+            picCanvas.Refresh();
+        }
+
+        public void DibujarGema(PictureBox picCanvas, CTransformation transform)
+        {
+            if (mAltura <= 0)
+            {
+                MessageBox.Show("Por favor, ingrese un valor válido para la altura de la gema.");
+                return;
+            }
+
+            // Asegurar que haya un Bitmap persistente en el PictureBox
+            if (picCanvas.Image == null || picCanvas.Image.Width != picCanvas.Width || picCanvas.Image.Height != picCanvas.Height)
+            {
+                picCanvas.Image?.Dispose();
+                picCanvas.Image = new Bitmap(Math.Max(1, picCanvas.Width), Math.Max(1, picCanvas.Height));
+            }
+
+            using (Graphics g = Graphics.FromImage(picCanvas.Image))
+            {
+                g.Clear(Color.White);
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+
+                // Guardar estado antes de aplicar transformaciones
+                GraphicsState state = g.Save();
+
+                if (transform != null)
+                {
+                    transform.ApplyTransforms(g);
+                }
+
+                // Calcular el centro
+                PointF centro = (transform == null) 
+                    ? new PointF(picCanvas.Width / 2, picCanvas.Height / 2) 
+                    : new PointF(0, 0);
+
+                mPen = new Pen(Color.Black, 2);
+
+                // TODO: Implementar nuevo método de dibujo aquí
+
+                g.Restore(state);
+            }
+            picCanvas.Refresh();
+        }
+
+        public void CloseForm(Form form)
+        {
+            form.Close();
+        }
+    }
+}
