@@ -17,60 +17,66 @@ namespace ProyectoP1
             InitializeComponent();
         }
 
-        private void OpenChild<T>() where T : Form, new()
+        private void CerrarFormulariosHijos()
         {
-            var existing = this.MdiChildren.OfType<T>().FirstOrDefault();
-            if (existing != null)
+            foreach (Form childForm in this.MdiChildren)
             {
-                if (existing.WindowState == FormWindowState.Minimized)
-                    existing.WindowState = FormWindowState.Normal;
-                existing.BringToFront();
-                existing.Activate();
-            }
-            else
-            {
-                var child = new T
-                {
-                    MdiParent = this
-                };
-                child.Show();
+                childForm.Close();
             }
         }
-
-       
+      
         private void polígonoEstrellado16Y8PuntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenChild<frmPoligonoEstrellado>();
+            CerrarFormulariosHijos();
+            frmPoligonoEstrellado frm = new frmPoligonoEstrellado();
+            frm.MdiParent = this;
+            frm.Show();
+
         }
 
         private void pentagonoEstrellado5PuntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura2
-            OpenChild<frmPentagonoEstrellado>();
+            CerrarFormulariosHijos();
+            frmPentagonoEstrellado frm = new frmPentagonoEstrellado();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void gemaDe10LadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura3
-            OpenChild<fmrGema>();
+            CerrarFormulariosHijos();
+            fmrGema frm = new fmrGema();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void estrellaGeométrica8PuntasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura4
-            OpenChild<frmEstrellaGeometrica>();
+            CerrarFormulariosHijos();
+            frmEstrellaGeometrica frm = new frmEstrellaGeometrica();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void hexágonoConcéntricoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura5
-            OpenChild<fmrHexagonoConcentrico>();
+            CerrarFormulariosHijos();
+            fmrHexagonoConcentrico frm = new fmrHexagonoConcentrico();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void florGeométricaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //figura6
-            OpenChild<frmFlor>();
+            CerrarFormulariosHijos();
+            frmFlor frm = new frmFlor();
+            frm.MdiParent = this;
+            frm.Show();
         }
     }
 }

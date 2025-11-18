@@ -94,8 +94,6 @@ namespace ProyectoP1
                     transform.ApplyTransforms(g);
                 }
 
-                mPen = new Pen(Color.White, 0);
-
                 // Dibujo del políg ono regular de 8 lados
                 PointF[] vertices = new PointF[8];
                 float radio = mSide / ((float)Math.Sin(Math.PI / 8));
@@ -115,8 +113,6 @@ namespace ProyectoP1
                     }
                     vertices[i] = new PointF(x, y);
                 }
-
-                g.DrawPolygon(mPen, vertices);
 
                 // Dibuja la estrella conectando los vértices en el orden especificado
                 using (Pen estrellaPen = new Pen(Color.Blue, 2))
